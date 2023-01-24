@@ -51,7 +51,9 @@ ol,
     margin-left: 20px;
 }
 
-
+.App{
+    text-align: center;
+}
 
 .clock {
     font-size: 30px;
