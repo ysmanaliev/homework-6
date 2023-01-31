@@ -1,55 +1,36 @@
-import React from "react";
-import EssaySelect from './EssaySelect';
+import {useForm}  from "react-hook-form";
 
-class EssayForm  extends React.Component {
-	constructor(props) {
-        super(props);
+export default function App () {
+	const {
+		register,
+		handleSubmit,	
+	}= useForm();
 
-		this.state = {
-			value: "BMW"
-        };
-			
-
-
-		this.handleChange = this.handleChange.bind(this);
-
-		this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-	handleChange(event) {
-		this.setState({value: event.target.value});
-    }
-
-	handleSubmit(event) {
-        alert ("Ваш выбор:"  + "" + this.state.value + " " + "Все верно?");
-		event.preventDefault();
-    
-	}
-
-	render() {
-		return (
-			<div className="form">
-				<EssaySelect />
-			
-            <form onSubmit={this.handleSubmit}>
-               <label >
-				Выберите марку машины пожалуйста:
-				<select className="select" value = {this.state.value} onChange={this.handleChange}>
-				
-				<option value="BMW">BMW</option>
-				<option value="Mersedes">Mersedes</option>
-				<option value="Lexus">Lexus</option>
-				<option value="Tayota">Tayota</option>
-				<option value="Ford">Ford</option>
-				</select> 
-			   </label>
-			   <input className="btn2" type="submit" value="Отправить"/>
-            </form>
-			</div>
-		)
+	const onSubmit = (data) => {
+        alert(JSON.stringify (data));
 		
 	}
 
+	return (
+		<div className="form ">
+			<h1> Регистрация</h1>
+			<form onSubmit={handleSubmit(onSubmit)}>
+			<label>
+				LastName:
+				<input className="select" placeholder="Введите ваше фамилие " {...register('Фамилия',{
+					required:true,
+				})}/>
+			</label>
+			<br/>
+			<label >
+				FirstName:
+				<input className="select" placeholder="Введите ваше имя " {...register('Имя',{
+					required:true,
+				})}/>
+			</label>
+				
+				<div><input className="btn" type="submit"/></div>
+			</form>
+		</div>
+	)
 }
-export default EssayForm
-
